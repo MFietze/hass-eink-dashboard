@@ -46,9 +46,16 @@ PADDING = 24
 
 COLOR_BLACK = 0
 COLOR_WHITE = 255
-COLOR_GRAY = 120
-COLOR_MEDIUM_GRAY = 150
-COLOR_LIGHT_GRAY = 180
+# Aliased to COLOR_BLACK rather than their original mid-tone values: at
+# display_levels=2 with dither_algorithm=none (hard threshold, no error
+# diffusion), any value that isn't unambiguously 0 or 255 risks rounding
+# to white depending on autocontrast/exposure, silently vanishing
+# secondary text, icons, and dividers against the white background. This
+# dashboard is permanently run in 2-level black/white mode, so nothing
+# here is meant to render as an intermediate gray any more.
+COLOR_GRAY = COLOR_BLACK
+COLOR_MEDIUM_GRAY = COLOR_BLACK
+COLOR_LIGHT_GRAY = COLOR_BLACK
 
 
 def color_to_hex(c: int) -> str:
