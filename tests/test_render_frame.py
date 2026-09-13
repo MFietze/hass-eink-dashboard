@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import ClassVar
 
-from custom_components.eink_dashboard.const import COLOR_GRAY, PADDING
+from custom_components.eink_dashboard.const import PADDING
 from custom_components.eink_dashboard.render import DEFAULT_METRICS
 from tests.helpers import (
     assert_all_white,
@@ -65,7 +65,7 @@ class TestRenderFrame:
                 "y": 0,
                 "w": W,
                 "h": H,
-                "fill_color": COLOR_GRAY,
+                "fill_color": 120,
             }
         ]
         img = render_to_image(widgets, self._CONFIG)
@@ -94,7 +94,7 @@ class TestRenderFrame:
         assert_has_dark_pixels(img, inset, inset, W - inset, H - inset)
 
     def test_frame_gray_border(self) -> None:
-        # color=COLOR_GRAY produces a gray border instead of black.
+        # color=120 produces a gray border instead of black.
         W, H = 200, 150
         m = DEFAULT_METRICS
         widgets = [
@@ -104,7 +104,7 @@ class TestRenderFrame:
                 "y": 0,
                 "w": W,
                 "h": H,
-                "color": COLOR_GRAY,
+                "color": 120,
             }
         ]
         img = render_to_image(widgets, self._CONFIG)
