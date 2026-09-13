@@ -209,6 +209,8 @@
     },
     "dither_algorithm": {
       "options": {
+        "none": "None (hard threshold, sharpest edges)",
+        "ordered": "Ordered (fixed pattern, no noise)",
         "floyd_steinberg": "Floyd-Steinberg (recommended)",
         "atkinson": "Atkinson (high contrast)",
         "stucki": "Stucki (smooth gradients)",
