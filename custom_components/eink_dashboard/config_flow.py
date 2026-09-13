@@ -118,6 +118,8 @@ _TF_OPTIONS = [
 ]
 
 _DITHER_ALGO_OPTIONS = [
+    "none",
+    "ordered",
     "floyd_steinberg",
     "atkinson",
     "stucki",

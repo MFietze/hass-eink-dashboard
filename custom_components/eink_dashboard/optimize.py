@@ -62,8 +62,14 @@ _COLOR_SCHEMES: dict[str, ColorScheme] = {
 }
 
 # Maps dither_algorithm config strings to epaper-dithering DitherMode.
-# Only the four algorithms exposed in the UI are included.
+# "none" (hard nearest-color threshold, no error diffusion) and
+# "ordered" (fixed Bayer-matrix pattern) are included alongside the
+# four error-diffusion algorithms, since low display_levels values
+# otherwise always dither, which can look noisy/blurry for
+# high-contrast, text-heavy dashboards.
 _DITHER_MODES: dict[str, DitherMode] = {
+    "none": DitherMode.NONE,
+    "ordered": DitherMode.ORDERED,
     "floyd_steinberg": DitherMode.FLOYD_STEINBERG,
     "atkinson": DitherMode.ATKINSON,
     "stucki": DitherMode.STUCKI,
