@@ -270,11 +270,13 @@ class TestRenderGauge:
         assert_card_border(img, w, h, m)
 
     def test_gauge_card_left_bar(self) -> None:
-        # card_style="left_bar" draws a gray bar on the left edge.
+        # card_style="left_bar" draws a black bar on the left edge
+        # (COLOR_GRAY is aliased to COLOR_BLACK in this fork, see
+        # const.py).
         img = render_to_image(
             [self._base_widget(card_style="left_bar")], self._config()
         )
-        assert_has_gray_pixels(img, 0, 10, 20, 190)
+        assert_has_dark_pixels(img, 0, 10, 20, 190)
 
     def test_gauge_card_none_is_default(self) -> None:
         # Omitting card_style is byte-identical to card_style="none".

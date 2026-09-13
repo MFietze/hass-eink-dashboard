@@ -20,7 +20,6 @@ from custom_components.eink_dashboard.const import COLOR_BLACK, PADDING
 from tests.helpers import (
     assert_all_white,
     assert_has_dark_pixels,
-    assert_has_gray_pixels,
     content_bbox,
     pixel,
     render_to_image,
@@ -43,12 +42,14 @@ class TestRenderSeparator:
         assert pixel(img, 100, 52) == 255
 
     def test_separator_horizontal_bar(self) -> None:
-        # style="bar" draws a ~6px gray horizontal bar.
+        # style="bar" draws a ~6px black horizontal bar (COLOR_GRAY is
+        # aliased to COLOR_BLACK so nothing renders as an intermediate
+        # gray in this dashboard's permanent 2-level black/white mode).
         widgets = [
             {"type": "separator", "x": PADDING, "y": 50, "style": "bar"}
         ]
         img = render_to_image(widgets, self._CONFIG)
-        assert_has_gray_pixels(img, PADDING, 50, 275, 56)
+        assert_has_dark_pixels(img, PADDING, 50, 275, 56)
         assert_all_white(img, PADDING, 58, 275, 70)
 
     def test_separator_vertical_line(self) -> None:
@@ -71,7 +72,9 @@ class TestRenderSeparator:
         assert pixel(img, 52, 100) == 255
 
     def test_separator_vertical_bar(self) -> None:
-        # direction="vertical", style="bar" draws a ~6px gray vertical bar.
+        # direction="vertical", style="bar" draws a ~6px black vertical
+        # bar (COLOR_GRAY is aliased to COLOR_BLACK, see
+        # test_separator_horizontal_bar).
         widgets = [
             {
                 "type": "separator",
@@ -82,7 +85,7 @@ class TestRenderSeparator:
             }
         ]
         img = render_to_image(widgets, self._CONFIG)
-        assert_has_gray_pixels(img, 50, PADDING, 56, 175)
+        assert_has_dark_pixels(img, 50, PADDING, 56, 175)
         assert_all_white(img, 58, PADDING, 70, 175)
 
     def test_separator_explicit_length(self) -> None:
